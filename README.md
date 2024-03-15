@@ -37,3 +37,19 @@ Make sure [conda](https://www.anaconda.com/distribution/) is installed.
   python main-trainer.py
 ```
 
+## Testing the trained model on the video
+
+Once we have the trained model. Make sure to follow the steps below.
+```
+    cd yolo_tracking
+
+    conda create --name yolotracker
+
+    conda activate yolotracker
+
+    pip install --upgrade pip setuptools wheel
+
+    pip install -r requirements.txt
+
+    python examples/track.py --tracking-method deepocsort --yolo-model yolov8n.pt --reid-model <model_name.pt> --source input/<video_name> --save --classes 0 --save --save-id-crops --save-mot
+```

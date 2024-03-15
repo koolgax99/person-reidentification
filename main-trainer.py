@@ -53,13 +53,6 @@ engine = torchreid.engine.ImageSoftmaxEngine(
     label_smooth=True
 )
 
-start_epoch = torchreid.utils.resume_from_checkpoint(
-    './log/run2/model/model.pth.tar-10',
-    model=model,
-    optimizer=optimizer,
-    scheduler=scheduler
-)
-
 engine.run(
     save_dir='./log/run2/',
     max_epoch=150,
@@ -67,6 +60,5 @@ engine.run(
     print_freq=10,
     test_only=False,
     fixbase_epoch=10,
-    start_epoch=start_epoch,
     open_layers=['classifier']
 )
