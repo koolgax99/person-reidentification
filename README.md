@@ -1,14 +1,37 @@
 # person-reidentification
 
+Make sure [conda](https://www.anaconda.com/distribution/) is installed.
+
+## Creating the dataset from a video
+
+You can crop the videos using the following command, but first will have to install yolo_tracker:
+```
+    #cd into the yolo_tracking folder in main
+    cd yolo_tracking
+
+    # create environment (However, you can create normal virtualenv as well)
+    conda create --name yolotracker 
+    conda activate yolotracker
+
+    # Install the dependencies
+    pip install --upgrade pip setuptools wheel
+    pip install -r requirements.txt
+    
+    # Run the follwoing script
+    python examples/track.py --tracking-method deepocsort --yolo-model yolov8n.pt --reid-model osnet_ain_x1_0_msmt17 --source input/<video_name> --save --classes 0 --save --save-id-crops --save-mot
+```
+
+Once we get the cropped images, you can open the `yolo_tracking/runs/track/<latest-exp>/crops/0` folder and then manually annotate to put them into respective folders. 
+
+Later you can use the `data_helper.py` file to rename the image names. We have to add the id into the name of each image before we can actually start training. 
+
 ## Finetuning the model
 
 ### Installing torchreid for training
 ---------------
-
-Make sure [conda](https://www.anaconda.com/distribution/) is installed.
 ```
 
-    # cd to your preferred directory and clone this repo
+    # clone this repo into the root folder
     git clone https://github.com/KaiyangZhou/deep-person-reid.git
 
     # create environment
@@ -39,24 +62,12 @@ Make sure [conda](https://www.anaconda.com/distribution/) is installed.
 
 ## Testing the trained model on the video
 
-Once we have the trained model. Make sure to follow the steps below.
+Once we have the trained model. Make sure to follow the step below.
 ```
+    # now change directory to yolo-tracking again
     cd yolo_tracking
 
-    conda create --name yolotracker
-
-    conda activate yolotracker
-
-    pip install --upgrade pip setuptools wheel
-
-    pip install -r requirements.txt
-
+    # Run the testing script, but we change the model with our own trained model
     python examples/track.py --tracking-method deepocsort --yolo-model yolov8n.pt --reid-model <custom_model_name.pt> --source input/<video_name> --save --classes 0 --save --save-id-crops --save-mot
 ```
 
-## Creating the dataset from a video
-
-You can crop the videos using the following command, but first will have to install yolo_tracker:
-```
-  python examples/track.py --tracking-method deepocsort --yolo-model yolov8n.pt --reid-model osnet_ain_x1_0_msmt17 --source input/<video_name> --save --classes 0 --save --save-id-crops --save-mot
-```
