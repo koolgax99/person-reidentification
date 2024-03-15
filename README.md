@@ -51,5 +51,12 @@ Once we have the trained model. Make sure to follow the steps below.
 
     pip install -r requirements.txt
 
-    python examples/track.py --tracking-method deepocsort --yolo-model yolov8n.pt --reid-model <model_name.pt> --source input/<video_name> --save --classes 0 --save --save-id-crops --save-mot
+    python examples/track.py --tracking-method deepocsort --yolo-model yolov8n.pt --reid-model <custom_model_name.pt> --source input/<video_name> --save --classes 0 --save --save-id-crops --save-mot
+```
+
+## Creating the dataset from a video
+
+You can crop the videos using the following command, but first will have to install yolo_tracker:
+```
+  python examples/track.py --tracking-method deepocsort --yolo-model yolov8n.pt --reid-model osnet_ain_x1_0_msmt17 --source input/<video_name> --save --classes 0 --save --save-id-crops --save-mot
 ```
