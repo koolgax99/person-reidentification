@@ -28,7 +28,9 @@ Make sure [conda](https://www.anaconda.com/distribution/) is installed.
 ```
 
 ### Data
-Move the data into correct folders inside the `train`, `query` and `gallery` folder in the `embodied-learning-data-test` folder in the root repository. 
+
+- Create the `train`, `query` and `gallery` folder in the `embodied-learning-data-test` folder in the root repo.
+- Move the data into correct folders inside the `train`, `query` and `gallery` folder. 
 
 ### Running the script
 ```
